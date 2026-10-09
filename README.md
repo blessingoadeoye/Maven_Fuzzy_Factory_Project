@@ -25,6 +25,12 @@ Using MySQL, I reviewed the company's growth, compared the performance of differ
 
 The complete technical analysis is available in the SQL workflow, while the Power BI report provides a visual summary of selected findings.
 
+### Project Materials
+
+- **Dataset source:** [Maven Analytics — Advanced SQL: MySQL for Analytics & Business Intelligence](https://www.udemy.com/course/advanced-sql-mysql-for-analytics-business-intelligence) (course reference; the underlying dataset is not hosted in this repository).
+- **[Complete SQL analysis](Analysis%20Workflow.sql):** Nine business questions, queries, and documented findings.
+- **[Power BI template](Analysis%20Report.pbit):** A `.pbit` template, which may require Power BI Desktop to access it.
+
 ---
 
 ## Background
@@ -34,10 +40,6 @@ The complete technical analysis is available in the SQL workflow, while the Powe
 The Maven Fuzzy Factory dataset was designed and structured as part of the Maven Analytics **Advanced SQL: MySQL for Analytics & Business Intelligence** course to provide students with practical SQL and business analysis experience.
 
 The dataset contains website session, pageview, order, product, and order-item activity that can be used to investigate the performance of a fictional e-commerce business.
-
-### Data Source
-
-[Maven Analytics — Advanced SQL: MySQL for Analytics & Business Intelligence](https://www.udemy.com/course/advanced-sql-mysql-for-analytics-business-intelligence)
 
 ### Data Context
 
@@ -113,6 +115,14 @@ The SQL workflow made use of several functions and techniques introduced through
 - Conditional aggregation
 
 Rather than using these techniques independently, they were combined throughout the workflow to answer the different business questions.
+
+---
+
+## Analytical Approach
+
+I organized the nine SQL questions into four connected business investigations: **growth and website efficiency**, **marketing acquisition**, **landing-page conversion**, and **product expansion**. Each stage builds on the preceding one. Traffic growth provides context, conversion measures whether visits translate into orders, landing-page testing investigates an improvement opportunity, and product analysis examines how the business offering evolved.
+
+This structure helps distinguish a descriptive result (such as rising sessions) from a decision-relevant comparison (such as conversion rates across landing pages). The SQL file retains the full query-level workflow.
 
 ---
 
@@ -353,6 +363,19 @@ This shows an additional way the wider product range contributed to orders beyon
 
 ---
 
+## Business Implications & Next Questions
+
+The results provide useful starting points for decisions, but each business action requires an appropriate comparison:
+
+- **Marketing investment:** Gsearch nonbrand produced the most orders among the channels reviewed. Before reallocating advertising budgets, I would compare channel conversion rates with acquisition costs and customer value; order volume alone does not establish return on investment.
+- **Website optimization:** `/lander-1` converted a larger share of the reviewed sessions than `/home`. The estimated incremental orders communicate potential business impact, but a stronger causal conclusion would require checking the experiment design, traffic allocation, and uncertainty around the observed difference.
+- **Funnel improvement:** The funnel identifies stages where sessions stop progressing. I would prioritize the largest drop-offs for closer investigation rather than assume every stage improved under the new landing page.
+- **Product and merchandising strategy:** Revenue and margin rose as the range expanded, and cross-sell relationships appeared in orders. The available analysis does not isolate the effect of each launch from other changes over time; product-level profitability and additional testing would strengthen future recommendations.
+
+These are evidence-led directions for further analysis, not claims that the data proves a particular action will succeed.
+
+---
+
 ## What I Learned
 
 This project helped me move beyond using SQL only to retrieve records and toward using queries to answer connected business questions.
@@ -368,7 +391,21 @@ Some of the main lessons from the project were:
 - Comparing product-level and overall performance as the product range expanded
 - Using order-item data to investigate cross-selling between products
 
-The project also showed the importance of interpreting query results carefully. Higher traffic or order volume does not automatically mean a channel is more efficient, while an estimated impact should be distinguished from an observed result.
+The project also changed how I think about analytical evidence. **A bigger number is not always a better outcome:** more sessions do not necessarily imply stronger conversion, and more channel orders do not establish better marketing efficiency. Comparing conversion rates helped me ask a more precise business question.
+
+The landing-page test taught me to separate an **observed difference** from an **estimated business impact**. The approximately 200 incremental orders were calculated by applying a conversion lift to later traffic; they were not directly counted as additional orders. Similarly, the product analysis showed me that growth occurring alongside new product launches does not by itself prove the launches caused all the growth.
+
+Finally, building the funnel with temporary tables helped me see how SQL can model a customer journey, not just summarize a dataset. My main takeaway is to begin with a decision-oriented question, choose the correct metric and comparison, and explain both what the results suggest and what remains unproven.
+
+---
+
+## Scope & Limitations
+
+- The company and dataset are fictional course materials; the results should be understood as an educational business case.
+- Different investigations use different date windows: the quarterly growth review ends before 2015, the landing-page comparison covers June–July 2012, and the product-related work extends into March 2015. They should not be presented as one uniform reporting period.
+- Marketing-channel order volume and conversion do not include advertising spend or customer acquisition costs, so channel profitability cannot be established.
+- The analysis observes changes alongside product expansion but does not highlight the causal effect of new product introductions.
+- The repository provides SQL and a Power BI template. Reproducing the queries or opening a fully populated Power BI report may require the original course database and local software.
 
 ---
 
@@ -385,8 +422,3 @@ The business also recorded stronger overall sales, revenue, and margin as its pr
 Overall, the project provided a broader view of how **traffic acquisition, website conversion, and product expansion** contributed to the company's performance.
 
 ---
-
-## Project Files
-
-- [**SQL Analysis**](Maven%20Fuzzy%20Factory%20Final%20Project.sql) — complete query workflow and analytical findings
-- [**Power BI Report**](Maven%20Fuzzy%20Factory%20Project%20Report.pbit) — full visual report of the analysis
